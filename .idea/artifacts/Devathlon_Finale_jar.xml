@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Devathlon Finale:jar">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="Devathlon Finale.jar">
+      <element id="module-output" name="Devathlon Finale" />
+    </root>
+  </artifact>
+</component>

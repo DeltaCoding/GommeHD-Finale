@@ -34,13 +34,13 @@ public class LobbyState {
 					
 					/** Send message **/
 					
-					if(currenttime % 15 == 0 || currenttime <= 5) {
+					if(currenttime % 15 == 0 || (currenttime <= 5 && currenttime != 0)) {
 						/** Send message **/
 						
 						if(currenttime == 1)
-							p.sendMessage(MTP.PREFIX + "Das Spiel beginnt in §eeiner Sekunde.");
+							p.sendMessage(MTP.PREFIX + "Das Spiel beginnt in Â§eeiner Sekunde.");
 						else
-							p.sendMessage(MTP.PREFIX + "Das Spiel beginnt in §e" + currenttime + " Sekunden§7.");
+							p.sendMessage(MTP.PREFIX + "Das Spiel beginnt in Â§e" + currenttime + " SekundenÂ§7.");
 					}
 					
 					
@@ -79,9 +79,9 @@ public class LobbyState {
 						/** Broadcast **/
 						
 						if(MTP.getMinPlayers() - Bukkit.getOnlinePlayers().size() == 1)
-							Bukkit.broadcastMessage(MTP.PREFIX + "Es fehlt noch §e" + (MTP.getMinPlayers() - Bukkit.getOnlinePlayers().size()) + " Spieler§7!" );
+							Bukkit.broadcastMessage(MTP.PREFIX + "Es fehlt noch Â§e" + (MTP.getMinPlayers() - Bukkit.getOnlinePlayers().size()) + " SpielerÂ§7!" );
 						else
-							Bukkit.broadcastMessage(MTP.PREFIX + "Es fehlen noch §e" + (MTP.getMinPlayers() - Bukkit.getOnlinePlayers().size()) + " Spieler§7!" );
+							Bukkit.broadcastMessage(MTP.PREFIX + "Es fehlen noch Â§e" + (MTP.getMinPlayers() - Bukkit.getOnlinePlayers().size()) + " SpielerÂ§7!" );
 						
 						
 						/** Reset time **/

@@ -58,6 +58,15 @@ public class ListenerJoin implements Listener {
 			/** Send message **/
 			
 			p.sendMessage(MTP.PREFIX + "Du bist Zuschauer.");
+			
+			
+			/** Teleport **/
+			
+			p.teleport(MTP.getGameSpawn());
+		} else {
+			/** Teleport **/
+			
+			p.teleport(MTP.getLobbySpawn());
 		}
 	}
 	

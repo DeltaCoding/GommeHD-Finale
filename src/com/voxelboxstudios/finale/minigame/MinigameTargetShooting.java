@@ -2,6 +2,8 @@ package com.voxelboxstudios.finale.minigame;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class MinigameTargetShooting extends Minigame {
@@ -10,7 +12,7 @@ public class MinigameTargetShooting extends Minigame {
 	
 	@Override
 	public String getName() { 
-		return "Zielschießen";
+		return "Zielschieï¿½en";
 	}
 
 
@@ -18,7 +20,7 @@ public class MinigameTargetShooting extends Minigame {
 
 	@Override
 	public String getDescription() {
-		return "Treffe möglichst viele Ziele in einer angegebenen Zeit, um der Prinzessin deine Zielsicherheit zu beweisen!";
+		return "Treffe mï¿½glichst viele Ziele in einer angegebenen Zeit, um der Prinzessin deine Zielsicherheit zu beweisen!";
 	}
 
 	
@@ -28,5 +30,12 @@ public class MinigameTargetShooting extends Minigame {
 	public void start(List<Player> attenders) {
 		
 	}
-
+	
+	
+	/** Get location **/
+	
+	@Override
+	public Location getLocation() {
+		return new Location(Bukkit.getWorlds().get(0), 200, 32, 200);
+	}
 }

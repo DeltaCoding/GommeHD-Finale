@@ -36,7 +36,7 @@ public class MinigameManager {
 					
 					/** Send message **/
 					
-					p.sendMessage(MTP.PREFIX + "Gespielt wird: §e" + current.substring(0, pos));
+					p.sendMessage(MTP.PREFIX + "Gespielt wird:  Â§e" + current.substring(0, pos));
 				}
 				
 				
@@ -62,8 +62,8 @@ public class MinigameManager {
 					
 					/** Broadcast **/
 					
-					Bukkit.broadcastMessage(MTP.PREFIX + "Das gespielte Spiel lautet: §e" + current);
-					
+					Bukkit.broadcastMessage(MTP.PREFIX + "Das gespielte Spiel lautet: Â§e" + current);
+
 					
 					/** Scheduler **/
 					
@@ -87,6 +87,13 @@ public class MinigameManager {
 								if(!MTP.getSpectators().contains(p.getName())) {
 									attenders.add(p);
 								}
+							}
+
+
+							/** Teleport **/
+
+							for(Player p : attenders) {
+								p.teleport(minigame.getLocation());
 							}
 							
 							
@@ -117,6 +124,13 @@ public class MinigameManager {
 		/** Set minigame **/
 		
 		MTP.setMinigame(null);
+		
+		
+		/** Teleport **/
+		
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			p.teleport(MTP.getGameSpawn());
+		}
 	}
 	
 }

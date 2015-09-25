@@ -3,6 +3,7 @@ package com.voxelboxstudios.finale.minigame;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
@@ -27,6 +28,11 @@ public abstract class Minigame implements Listener {
 	/** Get description **/
 	
 	public abstract String getDescription();
+	
+	
+	/** Get location **/
+	
+	public abstract Location getLocation();
 	
 	
 	/** Start **/

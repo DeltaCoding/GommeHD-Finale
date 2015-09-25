@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,7 +19,7 @@ public class MTP extends JavaPlugin {
 
 	/** Prefix **/
 	
-	public static final String PREFIX = ChatColor.GOLD + "Merit the Princess " + ChatColor.YELLOW + "» " + ChatColor.GRAY;
+	public static final String PREFIX = ChatColor.GOLD + "Merit the Princess " + ChatColor.YELLOW + "Â» " + ChatColor.GRAY;
 	
 	
 	/** Game state **/
@@ -46,6 +47,12 @@ public class MTP extends JavaPlugin {
 	private static List<String> spectators;
 	
 	
+	/** Locations **/
+	
+	private static Location gamespawn;
+	private static Location lobbyspawn;
+	
+	
 	/** Enable **/
 	
 	public void onEnable() {
@@ -62,6 +69,12 @@ public class MTP extends JavaPlugin {
 		/** Minigame manager **/
 		
 		manager = new MinigameManager();
+		
+		
+		/** Locations **/
+		
+		gamespawn = new Location(Bukkit.getWorlds().get(0), 0, 32, 0);
+		lobbyspawn = new Location(Bukkit.getWorlds().get(0), 100, 32, 100);
 		
 		
 		/** Spectators **/
@@ -84,7 +97,21 @@ public class MTP extends JavaPlugin {
 	}
 
 		
-	/**Get spectators **/
+	/** Get lobby spawn **/
+	
+	public static Location getLobbySpawn() {
+		return lobbyspawn;
+	}
+	
+	
+	/** Get game spawn **/
+	
+	public static Location getGameSpawn() {
+		return gamespawn;
+	}
+	
+	
+	/** Get spectators **/
 	
 	public static List<String> getSpectators() {
 		return spectators;
@@ -107,7 +134,8 @@ public class MTP extends JavaPlugin {
 	
 	/** Set minigame **/
 	
-	public static void setMinigame(Minigame newminigame) {		minigame = newminigame;
+	public static void setMinigame(Minigame newminigame) {
+		minigame = newminigame;
 	}
 	
 	

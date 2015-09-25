@@ -17,6 +17,9 @@ public class IngameState {
 		/** Broadcast **/
 		
 		Bukkit.broadcastMessage(MTP.PREFIX + "Das Spiel beginnt!");
+		
+		
+		
 	}
 	
 }
