@@ -12,7 +12,7 @@ public class MinigameTargetShooting extends Minigame {
 	
 	@Override
 	public String getName() { 
-		return "Zielschie�en";
+		return "Zielschießen";
 	}
 
 
@@ -20,7 +20,7 @@ public class MinigameTargetShooting extends Minigame {
 
 	@Override
 	public String getDescription() {
-		return "Treffe m�glichst viele Ziele in einer angegebenen Zeit, um der Prinzessin deine Zielsicherheit zu beweisen!";
+		return "Treffe möglichst viele Ziele in einer angegebenen Zeit, um der Prinzessin deine Zielsicherheit zu beweisen!";
 	}
 
 	

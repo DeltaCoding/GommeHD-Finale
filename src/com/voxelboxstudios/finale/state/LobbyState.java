@@ -34,7 +34,7 @@ public class LobbyState {
 					
 					/** Send message **/
 					
-					if(currenttime % 15 == 0 || (currenttime <= 5 && currenttime != 0)) {
+					if(currenttime != 0 && (currenttime % 15 == 0 || currenttime <= 5)) {
 						/** Send message **/
 						
 						if(currenttime == 1)

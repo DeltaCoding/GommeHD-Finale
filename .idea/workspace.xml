@@ -7,26 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2936552-f31c-40cd-a979-e2ce4476b25e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/Devathlon_Finale_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="DELETED" beforePath="C:\Users\Jack\Documents\GitHub\GommeHD-Finale\bin\.gitignore" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerChat.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/princess/Princess.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/IngameState.java" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/IngameState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerJoin.java" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerJoin.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerLeave.java" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerLeave.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/LobbyState.java" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/LobbyState.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/MTP.java" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/MTP.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/Minigame.java" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/Minigame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameBomb.java" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameBomb.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameManager.java" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigamePest.java" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigamePest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameTargetShooting.java" afterPath="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameTargetShooting.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Devathlon Finale.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,43 +50,117 @@
       <file leaf-file-name="MTP.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/MTP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="2380">
-              <caret line="21" column="102" selection-start-line="21" selection-start-column="102" selection-end-line="21" selection-end-column="102" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MinigamePest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigamePest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MinigameManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1377" max-vertical-offset="2261">
-              <caret line="100" column="28" selection-start-line="100" selection-start-column="28" selection-end-line="100" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1785" max-vertical-offset="2720">
+              <caret line="122" column="5" selection-start-line="122" selection-start-column="5" selection-end-line="122" selection-end-column="5" />
               <folding>
-                <element signature="e#1467#2152#0" expanded="true" />
-                <element signature="e#1770#1778#0" expanded="true" />
-                <element signature="e#2151#2152#0" expanded="true" />
+                <element signature="e#2401#2402#0" expanded="true" />
+                <element signature="e#2422#2423#0" expanded="true" />
+                <element signature="e#2487#2488#0" expanded="true" />
+                <element signature="e#2509#2510#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LobbyState.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MinigameManager.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.01923077" vertical-offset="1771" max-vertical-offset="2499">
+              <caret line="116" column="4" selection-start-line="116" selection-start-column="4" selection-end-line="116" selection-end-column="4" />
+              <folding>
+                <element signature="e#1770#1778#0" expanded="true" />
+                <element signature="e#2586#2849#0" expanded="true" />
+                <element signature="e#2848#2849#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LobbyState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/LobbyState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51373625" vertical-offset="153" max-vertical-offset="1649">
+            <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1649">
               <caret line="36" column="87" selection-start-line="36" selection-start-column="87" selection-end-line="36" selection-end-column="87" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IngameState.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/IngameState.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListenerLeave.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerLeave.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+              <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Princess.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/princess/Princess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="173" max-vertical-offset="1054">
+              <caret line="28" column="77" selection-start-line="28" selection-start-column="77" selection-end-line="28" selection-end-column="77" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#854#862#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MinigameTargetShooting.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameTargetShooting.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
+              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameState.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/GameState.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EntityRabbit.class" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Bukkit/spigot-1.8.6.jar!/net/minecraft/server/v1_8_R3/EntityRabbit.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="22.44" vertical-offset="561" max-vertical-offset="8058">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListenerChat.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerChat.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#304#305#0" expanded="true" />
+                <element signature="e#348#349#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,9 +173,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerChat.java" />
+        <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/LobbyState.java" />
+        <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/npc/NPC_Packets.java" />
+        <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/npc/NPC.java" />
+        <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameTargetShooting.java" />
+        <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/IngameState.java" />
+        <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerLeave.java" />
+        <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/princess/Princess.java" />
         <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/MTP.java" />
         <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameManager.java" />
-        <option value="$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/LobbyState.java" />
       </list>
     </option>
   </component>
@@ -218,6 +289,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="state" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Devathlon Finale" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GommeHD-Finale" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="finale" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="princess" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -535,12 +628,19 @@
       <created>1443204950535</created>
       <option name="number" value="Default" />
       <updated>1443204950535</updated>
-      <workItem from="1443204956597" duration="978000" />
+      <workItem from="1443204956597" duration="3000000" />
     </task>
+    <task id="LOCAL-00001" summary="Minigames">
+      <created>1443205964161</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1443205964161</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="978000" />
+    <option name="totallyTimeSpent" value="3000000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
@@ -590,6 +690,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="Minigames" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minigames" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -608,31 +710,109 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/MTP.java">
+    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerChat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="2380">
-          <caret line="21" column="102" selection-start-line="21" selection-start-column="102" selection-end-line="21" selection-end-column="102" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1377" max-vertical-offset="2261">
-          <caret line="100" column="28" selection-start-line="100" selection-start-column="28" selection-end-line="100" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="e#1467#2152#0" expanded="true" />
-            <element signature="e#1770#1778#0" expanded="true" />
-            <element signature="e#2151#2152#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#304#305#0" expanded="true" />
+            <element signature="e#348#349#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/LobbyState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51373625" vertical-offset="153" max-vertical-offset="1649">
+        <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1649">
           <caret line="36" column="87" selection-start-line="36" selection-start-column="87" selection-end-line="36" selection-end-column="87" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/Minigame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/IngameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="850">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/listener/ListenerLeave.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+          <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Bukkit/spigot-1.8.6.jar!/net/minecraft/server/v1_8_R3/EntityRabbit.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="22.44" vertical-offset="561" max-vertical-offset="8058">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/state/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameTargetShooting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/princess/Princess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="173" max-vertical-offset="1054">
+          <caret line="28" column="77" selection-start-line="28" selection-start-column="77" selection-end-line="28" selection-end-column="77" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#854#862#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/MTP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1785" max-vertical-offset="2720">
+          <caret line="122" column="5" selection-start-line="122" selection-start-column="5" selection-end-line="122" selection-end-column="5" />
+          <folding>
+            <element signature="e#2401#2402#0" expanded="true" />
+            <element signature="e#2422#2423#0" expanded="true" />
+            <element signature="e#2487#2488#0" expanded="true" />
+            <element signature="e#2509#2510#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/voxelboxstudios/finale/minigame/MinigameManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.01923077" vertical-offset="1771" max-vertical-offset="2499">
+          <caret line="116" column="4" selection-start-line="116" selection-start-column="4" selection-end-line="116" selection-end-column="4" />
+          <folding>
+            <element signature="e#1770#1778#0" expanded="true" />
+            <element signature="e#2586#2849#0" expanded="true" />
+            <element signature="e#2848#2849#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

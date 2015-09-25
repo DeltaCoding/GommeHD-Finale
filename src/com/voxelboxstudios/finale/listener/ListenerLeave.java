@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class ListenerLeave implements Listener {
 
 	/** Leave **/
-	
+
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) {
 		/** Quit message **/

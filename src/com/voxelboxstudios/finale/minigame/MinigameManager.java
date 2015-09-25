@@ -117,20 +117,37 @@ public class MinigameManager {
 	
 	public void end() {
 		/** Set state **/
-		
+
 		MTP.setState(GameState.WAITING);
-		
-		
+
+
 		/** Set minigame **/
-		
+
 		MTP.setMinigame(null);
-		
-		
+
+
 		/** Teleport **/
-		
-		for(Player p : Bukkit.getOnlinePlayers()) {
+
+		for (Player p : Bukkit.getOnlinePlayers()) {
 			p.teleport(MTP.getGameSpawn());
 		}
+
+
+		/** Princess **/
+
+		new BukkitRunnable() {
+			public void run() {
+				/** Let the princess speak **/
+
+				MTP.getPrincess().speak();
+
+
+				/** Play sound **/
+
+				for (Player p : Bukkit.getOnlinePlayers()) {
+					p.playSound(p.getLocation(), Sound.VILLAGER_YES, 1, 3);
+				}
+			}
+		}.runTaskLater(MTP.getPlugin(), 2 * 20L);
 	}
-	
 }

@@ -3,6 +3,7 @@ package com.voxelboxstudios.finale;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.voxelboxstudios.finale.princess.Princess;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -21,7 +22,12 @@ public class MTP extends JavaPlugin {
 	
 	public static final String PREFIX = ChatColor.GOLD + "Merit the Princess " + ChatColor.YELLOW + "» " + ChatColor.GRAY;
 	
-	
+
+	/** Princess **/
+
+	private static Princess princess;
+
+
 	/** Game state **/
 	
 	private static GameState state;
@@ -69,7 +75,12 @@ public class MTP extends JavaPlugin {
 		/** Minigame manager **/
 		
 		manager = new MinigameManager();
-		
+
+
+		/** Princess **/
+
+		princess = new Princess();
+
 		
 		/** Locations **/
 		
@@ -89,7 +100,8 @@ public class MTP extends JavaPlugin {
 		pm.registerEvents(new ListenerJoin(), plugin);
 		pm.registerEvents(new ListenerLeave(), plugin);
 		pm.registerEvents(new ListenerFood(), plugin);
-		
+		pm.registerEvents(new ListenerChat(), plugin);
+
 		
 		/** Lobby state **/
 		
@@ -123,8 +135,15 @@ public class MTP extends JavaPlugin {
 	public static MinigameManager getMinigameManager() {
 		return manager;
 	}
-	
-	
+
+
+	/** Get princess **/
+
+	public static Princess getPrincess() {
+		return princess;
+	}
+
+
 	/** Get minigame **/
 	
 	public static Minigame getMinigame() {
