@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,12 +12,13 @@ import com.voxelboxstudios.finale.listener.*;
 import com.voxelboxstudios.finale.minigame.Minigame;
 import com.voxelboxstudios.finale.minigame.MinigameManager;
 import com.voxelboxstudios.finale.state.GameState;
+import com.voxelboxstudios.finale.state.LobbyState;
 
 public class MTP extends JavaPlugin {
 
 	/** Prefix **/
 	
-	public static final String PREFIX = "ï¿½6Merit the Princess ï¿½7";
+	public static final String PREFIX = ChatColor.GOLD + "Merit the Princess " + ChatColor.YELLOW + "» " + ChatColor.GRAY;
 	
 	
 	/** Game state **/
@@ -52,6 +54,11 @@ public class MTP extends JavaPlugin {
 		plugin = this;
 		
 		
+		/** State **/
+		
+		state = GameState.LOBBY;
+		
+		
 		/** Minigame manager **/
 		
 		manager = new MinigameManager();
@@ -68,10 +75,16 @@ public class MTP extends JavaPlugin {
 		
 		pm.registerEvents(new ListenerJoin(), plugin);
 		pm.registerEvents(new ListenerLeave(), plugin);
+		pm.registerEvents(new ListenerFood(), plugin);
+		
+		
+		/** Lobby state **/
+		
+		new LobbyState(30);
 	}
-	
-	
-	/** Get spectators **/
+
+		
+	/**Get spectators **/
 	
 	public static List<String> getSpectators() {
 		return spectators;
@@ -116,5 +129,12 @@ public class MTP extends JavaPlugin {
 	
 	public static void setState(GameState newstate) {
 		state = newstate;
+	}
+
+
+	/** Minimal players **/
+	
+	public static int getMinPlayers() {
+		return 4;
 	}
 }
