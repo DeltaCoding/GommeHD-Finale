@@ -92,5 +92,4 @@ public class LobbyState {
 			}
 		}.runTaskTimer(MTP.getPlugin(), 0L, 20L);
 	}
-	
 }

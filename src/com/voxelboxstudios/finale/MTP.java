@@ -7,6 +7,7 @@ import com.voxelboxstudios.finale.princess.Princess;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -84,15 +85,39 @@ public class MTP extends JavaPlugin {
 		
 		/** Locations **/
 		
-		gamespawn = new Location(Bukkit.getWorlds().get(0), 0, 32, 0);
-		lobbyspawn = new Location(Bukkit.getWorlds().get(0), 100, 32, 100);
+		gamespawn = new Location(Bukkit.getWorlds().get(0), 1551, 11, 376, 90, -30);
+		lobbyspawn = new Location(Bukkit.getWorlds().get(0), 1571, 10, 387);
 		
 		
 		/** Spectators **/
 		
 		spectators = new ArrayList<String>();
-		
-		
+
+
+		/** Worlds **/
+
+		for(World w : Bukkit.getWorlds()) {
+			/** Game rule **/
+
+			w.setGameRuleValue("doDaylightCycle", "false");
+
+
+			/** Set time **/
+
+			w.setTime(0L);
+
+
+			/** Set thundering **/
+
+			w.setThundering(false);
+
+
+			/** Set storm **/
+
+			w.setStorm(false);
+		}
+
+
 		/** Listeners **/
 		
 		PluginManager pm = Bukkit.getPluginManager();
@@ -101,6 +126,8 @@ public class MTP extends JavaPlugin {
 		pm.registerEvents(new ListenerLeave(), plugin);
 		pm.registerEvents(new ListenerFood(), plugin);
 		pm.registerEvents(new ListenerChat(), plugin);
+		pm.registerEvents(new ListenerWeather(), plugin);
+		pm.registerEvents(new ListenerDamage(), plugin);
 
 		
 		/** Lobby state **/
