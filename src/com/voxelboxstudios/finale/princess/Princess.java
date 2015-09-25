@@ -50,7 +50,10 @@ public class Princess {
 
         /** Broadcast **/
 
-        Bukkit.broadcastMessage(ChatColor.GOLD + "Prinzessin " + ChatColor.YELLOW + "» " + ChatColor.GRAY + "§o" + message);
+        speak(message);
     }
 
+    public void speak(String s) {
+        Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "Prinzessin " + ChatColor.YELLOW + "» " + ChatColor.GRAY + "§o" + s);
+    }
 }

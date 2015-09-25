@@ -1,8 +1,6 @@
 package com.voxelboxstudios.finale.listener;
 
-import org.bukkit.Effect;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,7 +9,6 @@ import org.bukkit.potion.PotionEffect;
 
 import com.voxelboxstudios.finale.MTP;
 import com.voxelboxstudios.finale.state.GameState;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class ListenerJoin implements Listener {
 
@@ -40,13 +37,6 @@ public class ListenerJoin implements Listener {
 
 		p.setLevel(0);
 		p.setExp(0);
-
-		new BukkitRunnable() {
-			public void run() {
-
-				p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_6.getId());
-			}
-		}.runTaskLater(MTP.getPlugin(), 20L);
 
 		for(PotionEffect pe : p.getActivePotionEffects())  {
 			p.removePotionEffect(pe.getType());

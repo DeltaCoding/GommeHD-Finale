@@ -77,6 +77,8 @@ public class MTP extends JavaPlugin {
 		
 		manager = new MinigameManager();
 
+		manager.setup();
+
 
 		/** Princess **/
 

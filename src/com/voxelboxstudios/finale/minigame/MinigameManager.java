@@ -1,6 +1,7 @@
 package com.voxelboxstudios.finale.minigame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -12,6 +13,53 @@ import com.voxelboxstudios.finale.MTP;
 import com.voxelboxstudios.finale.state.GameState;
 
 public class MinigameManager {
+
+	/** Minigames **/
+
+	private List<Minigame> minigames = new ArrayList<Minigame>();
+
+
+	/** Index **/
+
+	private int index = 0;
+
+
+	/** Setup **/
+
+	public void setup() {
+		/** Add minigames **/
+
+		minigames.add(new MinigamePest());
+		minigames.add(new MinigameBomb());
+		minigames.add(new MinigameTargetShooting());
+
+
+		/** Shuffle **/
+
+		Collections.shuffle(minigames);
+	}
+
+
+	/** Random **/
+
+	public void next() {
+		/** Minigame **/
+
+		Minigame m = minigames.get(index);
+
+
+		/** Index **/
+
+		index++;
+
+		if(index == minigames.size()) index = 0;
+
+
+		/** Start **/
+
+		start(m);
+	}
+
 
 	/** Start **/
 	
@@ -61,8 +109,9 @@ public class MinigameManager {
 					
 					
 					/** Broadcast **/
-					
-					Bukkit.broadcastMessage(MTP.PREFIX + "Das gespielte Spiel lautet: §e" + current);
+
+					Bukkit.broadcastMessage("§7Das gespielte Spiel lautet: §e" + current);
+					Bukkit.broadcastMessage("§7Beschreibung: §e" + minigame.getDescription());
 
 					
 					/** Scheduler **/
@@ -101,7 +150,7 @@ public class MinigameManager {
 							
 							minigame.start(attenders);
 						}
-					}.runTaskLater(MTP.getPlugin(), 2 * 20L);
+					}.runTaskLater(MTP.getPlugin(), 4 * 20L);
 					
 					
 					/** Cancel task **/

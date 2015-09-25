@@ -1,11 +1,8 @@
 package com.voxelboxstudios.finale.state;
 
-import org.bukkit.Bukkit;
+import org.bukkit.*;
 
 import com.voxelboxstudios.finale.MTP;
-import org.bukkit.Effect;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -47,6 +44,11 @@ public class IngameState {
 			/** Gamemode **/
 
 			p.setGameMode(GameMode.ADVENTURE);
+
+
+			/** Play music **/
+
+			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_6.getId());
 		}
 
 
@@ -54,13 +56,29 @@ public class IngameState {
 
 		new BukkitRunnable() {
 			public void run() {
+				/** Speak **/
 
+				MTP.getPrincess().speak("Wer hält um meine Hand an? Tragt die Entscheidung zum Gatten in spannenden Kämpfen aus. Mögen die Spiele beginnen!");
+
+
+				/** Play sound **/
+
+				for(Player p : Bukkit.getOnlinePlayers()) {
+					p.playSound(p.getLocation(), Sound.VILLAGER_YES, 1, 3);
+				}
+
+
+				/** Scheduler **/
+
+				new BukkitRunnable() {
+					public void run() {
+						/** Random minigame **/
+
+						MTP.getMinigameManager().next();
+					}
+				}.runTaskLater(MTP.getPlugin(), 5 * 20L);
 			}
 		}.runTaskLater(MTP.getPlugin(), 2 * 20L);
-
-		/** Speak **/
-
-		MTP.getPrincess().speak();
 	}
 	
 }
