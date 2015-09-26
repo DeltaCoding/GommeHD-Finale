@@ -11,6 +11,7 @@ import org.bukkit.World;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.voxelboxstudios.finale.guard.Guard;
 import com.voxelboxstudios.finale.listener.*;
 import com.voxelboxstudios.finale.minigame.Minigame;
 import com.voxelboxstudios.finale.minigame.MinigameManager;
@@ -21,7 +22,7 @@ public class MTP extends JavaPlugin {
 
 	/** Prefix **/
 	
-	public static final String PREFIX = ChatColor.GOLD + "Merit the Princess " + ChatColor.YELLOW + "Â» " + ChatColor.GRAY;
+	public static final String PREFIX = ChatColor.GOLD + "Marry the Princess " + ChatColor.YELLOW + "» " + ChatColor.GRAY;
 	
 
 	/** Princess **/
@@ -54,11 +55,16 @@ public class MTP extends JavaPlugin {
 	private static List<String> spectators;
 	
 	
+	/** Guards **/
+	
+	private static List<Guard> guards;
+	
+	
 	/** Locations **/
 	
 	private static Location gamespawn;
 	private static Location lobbyspawn;
-	
+	private static Location princessspawn;
 	
 	/** Enable **/
 	
@@ -66,6 +72,11 @@ public class MTP extends JavaPlugin {
 		/** Plugin **/
 		
 		plugin = this;
+		
+		
+		/** Guards **/
+		
+		guards = new ArrayList<Guard>();
 		
 		
 		/** State **/
@@ -79,16 +90,17 @@ public class MTP extends JavaPlugin {
 
 		manager.setup();
 
-
-		/** Princess **/
-
-		princess = new Princess();
-
 		
 		/** Locations **/
 		
 		gamespawn = new Location(Bukkit.getWorlds().get(0), 1551, 11, 376, 90, -30);
 		lobbyspawn = new Location(Bukkit.getWorlds().get(0), 1571, 10, 387);
+		princessspawn = new Location(Bukkit.getWorlds().get(0), 1542.5, 15, 376.5, -90, 38);
+		
+		
+		/** Princess **/
+
+		princess = new Princess(princessspawn);
 		
 		
 		/** Spectators **/
@@ -106,7 +118,7 @@ public class MTP extends JavaPlugin {
 
 			/** Set time **/
 
-			w.setTime(0L);
+			w.setTime(12300L);
 
 
 			/** Set thundering **/
@@ -118,7 +130,15 @@ public class MTP extends JavaPlugin {
 
 			w.setStorm(false);
 		}
-
+		
+		
+		/** Spawn guards **/
+		
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 387.5, -90, 0));
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 383.5, -90, 0));
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 369.5, -90, 0));
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 365.5, -90, 0));
+		
 
 		/** Listeners **/
 		
@@ -130,13 +150,39 @@ public class MTP extends JavaPlugin {
 		pm.registerEvents(new ListenerChat(), plugin);
 		pm.registerEvents(new ListenerWeather(), plugin);
 		pm.registerEvents(new ListenerDamage(), plugin);
-
+		pm.registerEvents(new ListenerDrop(), plugin);
+		pm.registerEvents(new ListenerMove(), plugin);
+		pm.registerEvents(new ListenerArmorStand(), plugin);
+		
 		
 		/** Lobby state **/
 		
 		new LobbyState(30);
 	}
+	
+	
+	/** Disable **/
+	
+	public void onDisable() {
+		/** Remove guards **/
+		
+		for(Guard g : guards) {
+			g.getArmorStand().remove();
+		}
+		
+		
+		/** Remove princess **/
+		
+		princess.getArmorStand().remove();
+	}
 
+	
+	/** Get guards **/
+	
+	public static List<Guard> getGuards() {
+		return guards;
+	}
+	
 		
 	/** Get lobby spawn **/
 	
@@ -151,6 +197,12 @@ public class MTP extends JavaPlugin {
 		return gamespawn;
 	}
 	
+	
+	/** Get Princess Lobby Spawn **/
+	
+	public static Location getPrincessSpawn() {
+		return princessspawn;
+	}
 	
 	/** Get spectators **/
 	
@@ -211,6 +263,6 @@ public class MTP extends JavaPlugin {
 	/** Minimal players **/
 	
 	public static int getMinPlayers() {
-		return 4;
+		return 2;
 	}
 }

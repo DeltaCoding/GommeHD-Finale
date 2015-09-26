@@ -12,6 +12,7 @@ public class IngameState {
 
 	/** Constructor **/
 	
+	@SuppressWarnings("deprecation")
 	public IngameState() {
 		/** Set state **/
 		
@@ -48,7 +49,7 @@ public class IngameState {
 
 			/** Play music **/
 
-			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_6.getId());
+			p.playEffect(MTP.getGameSpawn(), Effect.RECORD_PLAY, Material.RECORD_6.getId());
 		}
 
 
@@ -58,7 +59,7 @@ public class IngameState {
 			public void run() {
 				/** Speak **/
 
-				MTP.getPrincess().speak("Wer hÃ¤lt um meine Hand an? Tragt die Entscheidung zum Gatten in spannenden KÃ¤mpfen aus. MÃ¶gen die Spiele beginnen!");
+				MTP.getPrincess().speak("Wer hält um meine Hand an? Tragt die Entscheidung zum Gatten in spannenden Kämpfen aus. Mögen die Spiele beginnen!");
 
 
 				/** Play sound **/
@@ -76,7 +77,7 @@ public class IngameState {
 
 						MTP.getMinigameManager().next();
 					}
-				}.runTaskLater(MTP.getPlugin(), 5 * 20L);
+				}.runTaskLater(MTP.getPlugin(), 15 * 20L);
 			}
 		}.runTaskLater(MTP.getPlugin(), 2 * 20L);
 	}

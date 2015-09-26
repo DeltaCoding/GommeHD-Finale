@@ -3,22 +3,15 @@ package com.voxelboxstudios.finale.minigame;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 
 import com.voxelboxstudios.finale.MTP;
 
 public abstract class Minigame implements Listener {
-
-	/** Constructor **/
-	
-	public Minigame() {
-		/** Register listener **/
-		
-		Bukkit.getPluginManager().registerEvents(this, MTP.getPlugin());
-	}
-	
 	
 	/** Name **/
 
@@ -37,12 +30,38 @@ public abstract class Minigame implements Listener {
 	
 	/** Start **/
 	
-	public abstract void start(List<Player> attenders);
-	
+	public abstract void startGame(List<Player> attenders);
+
+	public void start(List<Player> attenders) {
+		/** Listener **/
+
+		Bukkit.getPluginManager().registerEvents(this, MTP.getPlugin());
+
+
+		/** Start game **/
+
+		startGame(attenders);
+	}
+
 	
 	/** End **/
 	
 	public void end() {
+		/** Listener **/
+
+		HandlerList.unregisterAll(this);
+
+		
+		/** Clear inventories **/
+		
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			p.getInventory().clear();
+			p.getInventory().setArmorContents(null);
+			p.setGameMode(GameMode.ADVENTURE);
+			p.setHealth(20.0D);
+		}
+		
+		
 		/** End in minigame manager **/
 		
 		MTP.getMinigameManager().end();

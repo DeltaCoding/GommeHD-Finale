@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -29,10 +31,12 @@ public class MinigameManager {
 	public void setup() {
 		/** Add minigames **/
 
-		minigames.add(new MinigamePest());
+		//minigames.add(new MinigamePest());
+		minigames.add(new MinigameLanzentunier());
 		minigames.add(new MinigameBomb());
+		minigames.add(new MinigameCastleWar());
 		minigames.add(new MinigameTargetShooting());
-
+		
 
 		/** Shuffle **/
 
@@ -77,6 +81,7 @@ public class MinigameManager {
 					p.playSound(p.getLocation(), Sound.WOOD_CLICK, 1f, 1f);
 					
 					
+					
 					/** Clear chat **/
 					
 					for(int i = 0; i < 100; i++) p.sendMessage(" ");
@@ -84,7 +89,7 @@ public class MinigameManager {
 					
 					/** Send message **/
 					
-					p.sendMessage(MTP.PREFIX + "Gespielt wird:  ยงe" + current.substring(0, pos));
+					p.sendMessage(MTP.PREFIX + "Gespielt wird: งe" + current.substring(0, pos));
 				}
 				
 				
@@ -110,13 +115,14 @@ public class MinigameManager {
 					
 					/** Broadcast **/
 
-					Bukkit.broadcastMessage("ยง7Das gespielte Spiel lautet: ยงe" + current);
-					Bukkit.broadcastMessage("ยง7Beschreibung: ยงe" + minigame.getDescription());
+					Bukkit.broadcastMessage("ง7Das gespielte Spiel lautet: งe" + current);
+					Bukkit.broadcastMessage("ง7Beschreibung: งe" + minigame.getDescription());
 
 					
 					/** Scheduler **/
 					
 					new BukkitRunnable() {
+						@SuppressWarnings("deprecation")
 						public void run() {
 							/** Set state **/
 							
@@ -142,7 +148,20 @@ public class MinigameManager {
 							/** Teleport **/
 
 							for(Player p : attenders) {
-								p.teleport(minigame.getLocation());
+								/** Default properties **/
+								
+								p.getInventory().clear();
+								p.getInventory().setArmorContents(null);
+								
+								
+								/** Stop effect **/
+								
+								p.playEffect(MTP.getGameSpawn(), Effect.RECORD_PLAY, 0);
+								
+								
+								/** Teleport **/
+								
+								if(minigame.getLocation() != null) p.teleport(minigame.getLocation());
 							}
 							
 							
@@ -164,6 +183,7 @@ public class MinigameManager {
 	
 	/** End **/
 	
+	@SuppressWarnings("deprecation")
 	public void end() {
 		/** Set state **/
 
@@ -177,8 +197,15 @@ public class MinigameManager {
 
 		/** Teleport **/
 
-		for (Player p : Bukkit.getOnlinePlayers()) {
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			p.setExp(0f);
+			p.setLevel(0);
+			
+			p.setHealth(20.0D);
+			
 			p.teleport(MTP.getGameSpawn());
+
+			p.playEffect(MTP.getGameSpawn(), Effect.RECORD_PLAY, Material.RECORD_6.getId());
 		}
 
 
@@ -189,13 +216,27 @@ public class MinigameManager {
 				/** Let the princess speak **/
 
 				MTP.getPrincess().speak();
+				
+				
+				/** Heart **/
+				
+				MTP.getPrincessSpawn().getWorld().playEffect(MTP.getPrincessSpawn().clone().add(0, 1.5, 0), Effect.HEART, 1);
 
 
 				/** Play sound **/
 
-				for (Player p : Bukkit.getOnlinePlayers()) {
+				for(Player p : Bukkit.getOnlinePlayers()) {
 					p.playSound(p.getLocation(), Sound.VILLAGER_YES, 1, 3);
 				}
+				
+				
+				/** Runnable **/
+				
+				new BukkitRunnable() {
+					public void run() {
+						next();
+					}
+				}.runTaskLater(MTP.getPlugin(), 15 * 20L);
 			}
 		}.runTaskLater(MTP.getPlugin(), 2 * 20L);
 	}
