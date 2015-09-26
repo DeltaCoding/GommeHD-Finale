@@ -245,6 +245,11 @@ public class MinigameLanzentunier extends Minigame {
         	Bukkit.broadcastMessage(MTP.PREFIX + "§e" + p.getName() + " §7hat gewonnen!");
         	
         	
+        	/** Points **/
+        	
+        	MTP.points.put(p.getName(), MTP.points.get(p.getName()) + 1);
+        	
+        	
         	/** Sounds **/
         	
         	for(Player tp : Bukkit.getOnlinePlayers()) {
@@ -447,4 +452,13 @@ public class MinigameLanzentunier extends Minigame {
     public void onEnter(VehicleEnterEvent e) {
     	if(on) e.setCancelled(true);
     }
+    
+    
+    /** Spectator location **/
+	
+	@Override
+	public Location getSpectatorLocation() {
+		return new Location(Bukkit.getWorlds().get(0), 1543.5, 9, 472.5);
+	}
+
 }

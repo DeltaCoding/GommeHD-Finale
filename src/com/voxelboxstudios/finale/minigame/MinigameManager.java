@@ -3,15 +3,18 @@ package com.voxelboxstudios.finale.minigame;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.voxelboxstudios.finale.MTP;
+import com.voxelboxstudios.finale.scoreboards.Scoreboards;
 import com.voxelboxstudios.finale.state.GameState;
 
 public class MinigameManager {
@@ -36,6 +39,8 @@ public class MinigameManager {
 		minigames.add(new MinigameBomb());
 		minigames.add(new MinigameCastleWar());
 		minigames.add(new MinigameTargetShooting());
+		minigames.add(new MinigameLanzenschubsen());
+		minigames.add(new MinigameHuegelkoenig());
 		
 
 		/** Shuffle **/
@@ -79,8 +84,7 @@ public class MinigameManager {
 					/** Play sound **/
 					
 					p.playSound(p.getLocation(), Sound.WOOD_CLICK, 1f, 1f);
-					
-					
+										
 					
 					/** Clear chat **/
 					
@@ -140,7 +144,16 @@ public class MinigameManager {
 							
 							for(Player p : Bukkit.getOnlinePlayers()) {
 								if(!MTP.getSpectators().contains(p.getName())) {
+									/** Stop effect **/
+									
+									p.playEffect(MTP.getGameSpawn(), Effect.RECORD_PLAY, 0);
+									
+									
+									/** Add to attenders **/
+									
 									attenders.add(p);
+								} else {
+									p.teleport(minigame.getSpectatorLocation());
 								}
 							}
 
@@ -152,11 +165,6 @@ public class MinigameManager {
 								
 								p.getInventory().clear();
 								p.getInventory().setArmorContents(null);
-								
-								
-								/** Stop effect **/
-								
-								p.playEffect(MTP.getGameSpawn(), Effect.RECORD_PLAY, 0);
 								
 								
 								/** Teleport **/
@@ -197,16 +205,32 @@ public class MinigameManager {
 
 		/** Teleport **/
 
+		Random r = new Random();
+		
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			p.setExp(0f);
 			p.setLevel(0);
 			
 			p.setHealth(20.0D);
 			
-			p.teleport(MTP.getGameSpawn());
+			p.teleport(MTP.getGameSpawn().clone().add(r.nextInt(6) - 3, 0, r.nextInt(6) - 3));
+			
+			p.getInventory().clear();
+			p.getInventory().setArmorContents(null);
+			
+			if(!MTP.getSpectators().contains(p.getName()))
+				p.setGameMode(GameMode.ADVENTURE);
+			else
+				p.setGameMode(GameMode.SPECTATOR);
 
+			
 			p.playEffect(MTP.getGameSpawn(), Effect.RECORD_PLAY, Material.RECORD_6.getId());
 		}
+		
+		
+		/** Scoreboards **/
+		
+		Scoreboards.update();
 
 
 		/** Princess **/

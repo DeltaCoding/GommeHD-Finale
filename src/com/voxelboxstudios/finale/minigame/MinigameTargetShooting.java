@@ -20,7 +20,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -92,7 +91,7 @@ public class MinigameTargetShooting extends Minigame {
 		
 		locations.add(new Location(Bukkit.getWorlds().get(0), 1638.5, 13, 406.5));
 		locations.add(new Location(Bukkit.getWorlds().get(0), 1642.5, 13, 398.5));
-		locations.add(new Location(Bukkit.getWorlds().get(0), 11636.5, 14, 406.5));
+		locations.add(new Location(Bukkit.getWorlds().get(0), 1636.5, 14, 406.5));
 		locations.add(new Location(Bukkit.getWorlds().get(0), 1640.5, 12, 414.5));
 		locations.add(new Location(Bukkit.getWorlds().get(0), 1649.5, 12, 416.5));
 		locations.add(new Location(Bukkit.getWorlds().get(0), 1655.5, 13, 411.5, 90, 0));
@@ -238,7 +237,7 @@ public class MinigameTargetShooting extends Minigame {
 					/** Level and exp **/
 					
 					p.setLevel(points.get(p.getName()));
-					p.setExp((1f / 30) * points.get(p.getName()));
+					p.setExp((1f / 15) * points.get(p.getName()));
 					
 					
 					/** Check win **/
@@ -247,14 +246,6 @@ public class MinigameTargetShooting extends Minigame {
 				}
 			}
 		}
-	}
-	
-	
-	/** Projectile hit **/
-	
-	@EventHandler
-	public void onHit(ProjectileHitEvent e) {
-		e.getEntity().remove();
 	}
 	
 	
@@ -268,6 +259,7 @@ public class MinigameTargetShooting extends Minigame {
 					
 					for(Player t : Bukkit.getOnlinePlayers()) {
 						t.getInventory().clear();
+						
 						t.setLevel(0);
 						p.setExp(0f);
 					}
@@ -293,9 +285,13 @@ public class MinigameTargetShooting extends Minigame {
 		        	/** Sounds **/
 		        	
 		        	for(Player tp : Bukkit.getOnlinePlayers()) {
-		        		if(tp == p)
+		        		if(tp == p) {
+		        			/** Points **/
+	    		        	
+	    		        	MTP.points.put(p.getName(), MTP.points.get(p.getName()) + 1);
+	    		        	
 		        			tp.playSound(p.getLocation(), "win", 1, 1);
-		        		else
+		        		} else
 		        			tp.playSound(p.getLocation(), "lose", 1, 1);
 		        	}
 		        	
@@ -333,6 +329,7 @@ public class MinigameTargetShooting extends Minigame {
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		if(!teleported) return;
+		if(MTP.getSpectators().contains(e.getPlayer().getName())) return;
 		
 		if(e.getTo().getX() != e.getFrom().getX() || e.getTo().getY() != e.getFrom().getY() || e.getTo().getZ() != e.getFrom().getZ()) {
 			e.setTo(e.getFrom());
@@ -345,5 +342,13 @@ public class MinigameTargetShooting extends Minigame {
 	@Override
 	public Location getLocation() {
 		return null;
+	}
+
+
+	/** Get spectator location **/
+	
+	@Override
+	public Location getSpectatorLocation() {
+		return new Location(Bukkit.getWorlds().get(0), 1646.5, 9, 412.5);
 	}
 }

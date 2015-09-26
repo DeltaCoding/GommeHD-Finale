@@ -1,17 +1,25 @@
 package com.voxelboxstudios.finale;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.voxelboxstudios.finale.princess.Princess;
+import com.voxelboxstudios.finale.resource.PacketPlayResourcePackStatus;
+import com.voxelboxstudios.finale.resource.Status;
+import com.voxelboxstudios.finale.speakers.Guard;
+import com.voxelboxstudios.finale.speakers.Hofnarr;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import com.voxelboxstudios.finale.guard.Guard;
 import com.voxelboxstudios.finale.listener.*;
 import com.voxelboxstudios.finale.minigame.Minigame;
 import com.voxelboxstudios.finale.minigame.MinigameManager;
@@ -45,6 +53,11 @@ public class MTP extends JavaPlugin {
 	private static Minigame minigame;
 	
 	
+	/** Hofnarren **/
+	
+	private static List<Hofnarr> hofnarren;
+	
+	
 	/** Minigame manager **/
 	
 	private static MinigameManager manager;
@@ -66,6 +79,17 @@ public class MTP extends JavaPlugin {
 	private static Location lobbyspawn;
 	private static Location princessspawn;
 	
+	
+	/** Packet **/
+	
+	public static PacketPlayResourcePackStatus packet;
+	
+	
+	/** Points **/
+	
+	public static Map<String, Integer> points = new HashMap<String, Integer>();
+	
+	
 	/** Enable **/
 	
 	public void onEnable() {
@@ -77,6 +101,16 @@ public class MTP extends JavaPlugin {
 		/** Guards **/
 		
 		guards = new ArrayList<Guard>();
+		
+		
+		/** Hofnarren **/
+		
+		hofnarren = new ArrayList<Hofnarr>();
+		
+		
+		/** Packet **/
+		
+		packet = new PacketPlayResourcePackStatus();
 		
 		
 		/** State **/
@@ -134,10 +168,17 @@ public class MTP extends JavaPlugin {
 		
 		/** Spawn guards **/
 		
-		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 387.5, -90, 0));
-		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 383.5, -90, 0));
-		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 369.5, -90, 0));
-		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 365.5, -90, 0));
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 387.5, -90, 0), false);
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 383.5, -90, 0), false);
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 369.5, -90, 0), true);
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 365.5, -90, 0), false);
+		
+		
+		/** Hofnarren **/
+		
+		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1541.5, 15, 375.5, -90, 35), "DerSpinner");
+		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1555.5, 11, 382.5, 135, 0), "l_Maxi_l");
+		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1646.5, 9, 392.5, 45, 0), "l_Maxi_l");
 		
 
 		/** Listeners **/
@@ -155,6 +196,9 @@ public class MTP extends JavaPlugin {
 		pm.registerEvents(new ListenerArmorStand(), plugin);
 		pm.registerEvents(new ListenerInteract(), plugin);
 		pm.registerEvents(new ListenerBuild(), plugin);
+		pm.registerEvents(new ListenerClick(), plugin);
+		pm.registerEvents(new ListenerProjectile(), plugin);
+		pm.registerEvents(new ListenerLogin(), plugin);
 		
 		
 		/** Lobby state **/
@@ -170,6 +214,13 @@ public class MTP extends JavaPlugin {
 		
 		for(Guard g : guards) {
 			g.getArmorStand().remove();
+		}
+		
+		
+		/** Remove Hofnarren **/
+		
+		for(Hofnarr h : hofnarren) {
+			h.getArmorStand().remove();
 		}
 		
 		
@@ -266,5 +317,29 @@ public class MTP extends JavaPlugin {
 	
 	public static int getMinPlayers() {
 		return 2;
+	}
+
+	
+	/** Resource pack result **/
+	
+	public static void resourcePackResult(final Player p, Status status) {
+		/** Check status **/
+		
+		if(!(status == Status.SUCCESSFULLY_LOADED || status == Status.ACCEPTED)) {
+			/** Kick player **/
+			
+			new BukkitRunnable() {
+				public void run() {
+					p.kickPlayer("§cBitte aktiviere Resource Packs in deinen Einstellungen.");
+				}
+			}.runTask(plugin);
+		}
+	}
+
+
+	/** Hofnarren **/
+	
+	public static List<Hofnarr> getHofnarren() {
+		return hofnarren;
 	}
 }

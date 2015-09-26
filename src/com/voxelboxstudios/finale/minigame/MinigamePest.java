@@ -15,10 +15,16 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
+
 import com.voxelboxstudios.finale.MTP;
 
 public class MinigamePest extends Minigame {
 
+	/** Task **/
+	
+	private List<BukkitTask> ID;
+	
 	/** Armor **/
 	
 	private ItemStack deadlord;
@@ -28,14 +34,12 @@ public class MinigamePest extends Minigame {
 	private ItemStack leggins;
 	private ItemStack boots;
 	
-	/** Playerlist **/
+	/** Playerlists **/
 	
 	private List<Player> playerlist;
-	
-	/** Deadlist **/
-	
-	private List<Player> deadlist;
-	
+	private List<Player> team_dead;
+	private List<Player> team_alive;
+		
 	/** Dead **/
 	
 	private Player dead;
@@ -61,27 +65,32 @@ public class MinigamePest extends Minigame {
 	@Override
 	public void startGame(List<Player> attenders) {
 		
+		ID = new ArrayList<>();
 		playerlist = new ArrayList<>(attenders);
+		team_alive = new ArrayList<>(attenders);
+		team_dead = new ArrayList<>();
 		Collections.shuffle(playerlist);
 		dead = playerlist.get(0);
+		team_alive.remove(dead);
+		team_dead.add(dead);
 		Bukkit.broadcastMessage(MTP.PREFIX + dead.getName() + " ist mit der Pest infiziert!");
 		
-		this.deadlord = new ItemStack(Material.SKULL_ITEM, 0, (byte) 1);
-		this.helpers = new ItemStack(Material.SKULL_ITEM, 0, (byte) 0);
+		this.deadlord = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
+		this.helpers = new ItemStack(Material.SKULL_ITEM, 1, (byte) 0);
 		
-		ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE, 0);
+		ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
 		LeatherArmorMeta meta2 = (LeatherArmorMeta) chest.getItemMeta();
 		meta2.setColor(Color.BLACK);
 		chest.setItemMeta(meta2);
 		this.chest = chest;
 		
-		ItemStack leggins = new ItemStack(Material.LEATHER_LEGGINGS, 0);
+		ItemStack leggins = new ItemStack(Material.LEATHER_LEGGINGS, 1);
 		LeatherArmorMeta meta3 = (LeatherArmorMeta) leggins.getItemMeta();
 		meta3.setColor(Color.BLACK);
 		leggins.setItemMeta(meta3);
 		this.leggins = leggins;
 		
-		ItemStack feet = new ItemStack(Material.LEATHER_BOOTS, 0);
+		ItemStack feet = new ItemStack(Material.LEATHER_BOOTS, 1);
 		LeatherArmorMeta meta4 = (LeatherArmorMeta) feet.getItemMeta();
 		meta4.setColor(Color.BLACK);
 		feet.setItemMeta(meta4);
@@ -92,6 +101,52 @@ public class MinigamePest extends Minigame {
 		dead.getInventory().setLeggings(this.leggins);
 		dead.getInventory().setBoots(this.boots);
 		
+		ID.add(new BukkitRunnable() {
+			
+			int timer = 30;
+			
+			public void run() {
+				
+				for(Player all : Bukkit.getOnlinePlayers()) {
+					
+					all.setLevel(timer);
+					all.setExp(0);
+					all.setExp((1f/30) * timer);
+					
+				}
+				
+				timer--;
+				
+			}
+			
+		}.runTaskTimer(MTP.getPlugin(), 0L, 20L));
+		
+		ID.add(new BukkitRunnable() {
+			
+			public void run() {
+				
+				Bukkit.broadcastMessage(MTP.PREFIX + "§e" + "Die Spieler" + " §7haben gewonnen!");
+				
+				for(Player tp : Bukkit.getOnlinePlayers()) {
+	        		if(tp == dead) {
+	        			/** Points **/
+    		        	
+    		        	MTP.points.put(tp.getName(), MTP.points.get(tp.getName()) + 1);
+	        			tp.playSound(tp.getLocation(), "win", 1, 1);
+	        		} else
+	        			tp.playSound(tp.getLocation(), "lose", 1, 1);
+	        	}
+				
+				new BukkitRunnable() {
+	        		public void run() {
+	        			end();
+	        		}
+	        	}.runTaskLater(MTP.getPlugin(), 10 * 20L);
+				
+			}
+			
+		}.runTaskLater(MTP.getPlugin(), 20L*45));
+		
 	}
 	
 	/** Dead on click **/
@@ -101,16 +156,18 @@ public class MinigamePest extends Minigame {
 		
 		if(e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
 			
-			if(e.getDamager().equals(dead) || deadlist.contains(e.getDamager())) {
-				
-				if(deadlist.contains(e.getEntity()) || e.getEntity().equals(dead)) {
-					e.setCancelled(true);
-				} else {
+			if(team_dead.contains(e.getEntity()) && team_dead.contains(e.getDamager()) || team_alive.contains(e.getEntity()) && team_alive.contains(e.getDamager())) {
+				e.setDamage(0D);
+				e.setCancelled(true);
+			} else {
 					
+				if(team_dead.contains(e.getDamager())) {
+						
 					e.setDamage(0D);
 					Player p = (Player) e.getEntity();
-					
-					deadlist.add(p);
+						
+					team_alive.remove(p);
+					team_dead.add(p);
 					p.sendMessage(MTP.PREFIX + "Du bist nun auch infiziert!");
 					
 					p.getInventory().setHelmet(this.helpers);
@@ -118,53 +175,40 @@ public class MinigamePest extends Minigame {
 					p.getInventory().setLeggings(this.leggins);
 					p.getInventory().setBoots(this.boots);
 					
-					if(deadlist.size() == playerlist.size()-1) {
-						for(Player pl : deadlist) {
-							playerlist.remove(pl);
+					if(team_alive.size() == 0) {
+						
+						Bukkit.broadcastMessage(MTP.PREFIX + "§e" + "Der Tod" + " §7hat gewonnen!");
+						
+						for(Player tp : Bukkit.getOnlinePlayers()) {
+			        		if(tp == dead) {
+			        			tp.playSound(tp.getLocation(), "win", 1, 1);
+			        			
+			        			/** Points **/
+		    		        	
+		    		        	MTP.points.put(tp.getName(), MTP.points.get(tp.getName()) + 1);
+			        		} else
+			        			tp.playSound(tp.getLocation(), "lose", 1, 1);
+			        	}
+						
+						for(BukkitTask ids : ID) {
+							ids.cancel();
 						}
+						
+						new BukkitRunnable() {
+			        		public void run() {
+			        			end();
+			        		}
+			        	}.runTaskLater(MTP.getPlugin(), 10 * 20L);
+			        	
 					}
-					
-					win(playerlist.get(0));
-					
+						
 				}
-				
-			}
 					
+			}
+									
 		}
 				
 	}
-	
-	/** Check win **/
-    
-    private void win(Player last) {
-    	/** Check player **/
-    	
-    	Player p = last;
-    	
-    	if(p != null) {
-        	/** Broadcast **/
-        	
-        	Bukkit.broadcastMessage(MTP.PREFIX + "§e" + p.getName() + " §7hat gewonnen!");
-        	
-        	
-        	/** Sounds **/
-        	
-        	for(Player tp : Bukkit.getOnlinePlayers()) {
-        		if(tp == p)
-        			tp.playSound(p.getLocation(), "win", 1, 1);
-        		else
-        			tp.playSound(p.getLocation(), "lose", 1, 1);
-        	}
-        	        	
-        	/** Runnable **/
-        	
-        	new BukkitRunnable() {
-        		public void run() {
-        			end();
-        		}
-        	}.runTaskLater(MTP.getPlugin(), 10 * 20L);
-        }
-    }
 	
 	/** Get location **/
 	
@@ -173,5 +217,11 @@ public class MinigamePest extends Minigame {
 		Random r = new Random();
     	
         return new Location(Bukkit.getWorlds().get(0), 1543.5 + r.nextInt(32) - 16, 9, 472.5 + r.nextInt(60) - 30);
+	}
+
+
+	@Override
+	public Location getSpectatorLocation() {
+		return new Location(Bukkit.getWorlds().get(0), 1543.5, 9, 472.5);
 	}
 }

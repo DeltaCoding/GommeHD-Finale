@@ -32,6 +32,11 @@ public class IngameState {
 		/** Teleport **/
 
 		for(Player p : Bukkit.getOnlinePlayers()) {
+			/** Points **/
+			
+			MTP.points.put(p.getName(), 0);
+			
+			
 			/** Clear inventory **/
 
 			p.getInventory().clear();

@@ -34,13 +34,16 @@ public class MinigameBomb extends Minigame {
 	
 	private Player bombed;
 	
+	
 	/** Task **/
 	
 	private List<BukkitTask> ID;
 	
+	
 	/** Playerlist **/
 	
 	private List<Player> playerlist;
+	
 	
 	/** Get name **/
 	
@@ -226,6 +229,11 @@ public class MinigameBomb extends Minigame {
         	Bukkit.broadcastMessage(MTP.PREFIX + "§e" + p.getName() + " §7hat gewonnen!");
         	
         	
+        	/** Points **/
+        	
+        	MTP.points.put(p.getName(), MTP.points.get(p.getName()) + 1);
+        	
+        	
         	/** Sounds **/
         	
         	for(Player tp : Bukkit.getOnlinePlayers()) {
@@ -245,6 +253,7 @@ public class MinigameBomb extends Minigame {
         }
     }
 
+    
 	/** Get location **/
 	
 	@Override
@@ -252,5 +261,13 @@ public class MinigameBomb extends Minigame {
 		Random r = new Random();
     	
         return new Location(Bukkit.getWorlds().get(0), 1543.5 + r.nextInt(32) - 16, 9, 472.5 + r.nextInt(60) - 30);
+	}
+
+
+	/** Spectator location **/
+	
+	@Override
+	public Location getSpectatorLocation() {
+		return new Location(Bukkit.getWorlds().get(0), 1543.5, 9, 472.5);
 	}
 }

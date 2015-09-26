@@ -13,7 +13,7 @@ public class ListenerLeave implements Listener {
 	public void onQuit(PlayerQuitEvent e) {
 		/** Quit message **/
 		
-		e.setQuitMessage(null);
+		e.setQuitMessage("§e» §6" + e.getPlayer().getName() + " §7hat das Spiel verlassen.");
 	}
 	
 	
@@ -23,7 +23,7 @@ public class ListenerLeave implements Listener {
 	public void onKick(PlayerKickEvent e) {
 		/** Quit message **/
 		
-		e.setLeaveMessage(null);
+		e.setLeaveMessage("§e» §6" + e.getPlayer().getName() + " §7hat das Spiel verlassen.");
 	}	
 	
 }

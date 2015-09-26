@@ -28,6 +28,11 @@ public abstract class Minigame implements Listener {
 	public abstract Location getLocation();
 	
 	
+	/** Get spectator location **/
+	
+	public abstract Location getSpectatorLocation();
+	
+	
 	/** Start **/
 	
 	public abstract void startGame(List<Player> attenders);

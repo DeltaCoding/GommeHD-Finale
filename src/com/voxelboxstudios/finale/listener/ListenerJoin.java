@@ -1,5 +1,6 @@
 package com.voxelboxstudios.finale.listener;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,6 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.potion.PotionEffect;
 
 import com.voxelboxstudios.finale.MTP;
+import com.voxelboxstudios.finale.scoreboards.Scoreboards;
 import com.voxelboxstudios.finale.state.GameState;
 
 public class ListenerJoin implements Listener {
@@ -24,6 +26,16 @@ public class ListenerJoin implements Listener {
 		/** Player **/
 		
 		final Player p = e.getPlayer();
+
+		
+		/** No scoreboard **/
+		
+		p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+		
+		
+		/** Resource pack **/
+		
+		MTP.packet.addChannelForPlayer(p);
 		
 		
 		/** Default properties **/
@@ -53,6 +65,11 @@ public class ListenerJoin implements Listener {
 			}
 			
 			
+			/** Scoreboard **/
+			
+			Scoreboards.update(e.getPlayer());
+			
+			
 			/** Set gamemode **/
 			
 			p.setGameMode(GameMode.SPECTATOR);
@@ -67,6 +84,11 @@ public class ListenerJoin implements Listener {
 			
 			p.teleport(MTP.getGameSpawn());
 		} else {
+			/** Join message **/
+			
+			e.setJoinMessage("§e» §6" + p.getName() + " §7hat das Spiel betreten.");
+			
+			
 			/** Teleport **/
 			
 			p.teleport(MTP.getLobbySpawn());
