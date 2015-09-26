@@ -236,6 +236,11 @@ public class MinigameTargetShooting extends Minigame {
 					p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 3);
 					
 					
+					/** Title **/
+					
+					Util.sendTitle(p, 5, 10, 5, "", "§eGetroffen!");
+					
+					
 					/** Level and exp **/
 					
 					p.setLevel(points.get(p.getName()));

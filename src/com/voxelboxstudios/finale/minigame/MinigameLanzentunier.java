@@ -70,7 +70,7 @@ public class MinigameLanzentunier extends Minigame {
 
     @Override
     public String getDescription() {
-        return "Reite auf einem Pferd und versuche die Mitstreiter mit deiner Lanze herunterzuwerfen. Zeige ihnen wo der Hammer hängt!";
+        return "Reite auf einem Pferd und versuche die Mitstreiter mit deiner Lanze herunterzuwerfen. Zeige ihnen wo der Hammer hÃ¤ngt!";
     }
 
 
@@ -139,7 +139,7 @@ public class MinigameLanzentunier extends Minigame {
         
         ItemStack lanze = new ItemStack(Material.STICK, 1);
         ItemMeta lanzenmeta = lanze.getItemMeta();
-        lanzenmeta.setDisplayName("§6Lanze");
+        lanzenmeta.setDisplayName("Â§6Lanze");
         lanze.setItemMeta(lanzenmeta);
 
 
@@ -169,7 +169,7 @@ public class MinigameLanzentunier extends Minigame {
             
             /** Armor **/
             
-            p.getInventory().setHelmet(Util.getShortItem(Material.CHAINMAIL_CHESTPLATE, "§r§7Brustplatte"));
+            p.getInventory().setChestplate(Util.getShortItem(Material.CHAINMAIL_CHESTPLATE, "Â§rÂ§7Brustplatte"));
 
 
             /** Set passenger **/
@@ -238,7 +238,7 @@ public class MinigameLanzentunier extends Minigame {
         if(p != null) {
         	/** Broadcast **/
         	
-        	Bukkit.broadcastMessage(MTP.PREFIX + "§e" + p.getName() + " §7hat gewonnen!");
+        	Bukkit.broadcastMessage(MTP.PREFIX + "Â§e" + p.getName() + " Â§7hat gewonnen!");
         	
         	
         	/** Points **/
@@ -342,10 +342,10 @@ public class MinigameLanzentunier extends Minigame {
         	
         	/** Action bar **/
         	
-        	String ss = "§a";
+        	String ss = "Â§c";
         	
         	for(int i = 0; i < health.get(p.getName()); i++) {
-        		ss = ss + "O";
+        		ss = ss + "â¤";
         	}
         	
         	ActionBar.sendActionBar(p, ss);
@@ -367,6 +367,11 @@ public class MinigameLanzentunier extends Minigame {
         		/** Play sound **/
         		
         		p.playSound(p.getLocation(), Sound.HORSE_ANGRY, 1, 3);
+        		
+        		
+        		/** Title **/
+				
+				Util.sendTitle(p, 10, 20, 10, "", "Â§cDu wurdest besiegt!");
         		
         		
         		/** Eject **/

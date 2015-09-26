@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -18,6 +19,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import com.voxelboxstudios.finale.MTP;
+import com.voxelboxstudios.finale.util.Util;
 
 public class MinigamePest extends Minigame {
 
@@ -73,6 +75,8 @@ public class MinigamePest extends Minigame {
 		dead = playerlist.get(0);
 		team_alive.remove(dead);
 		team_dead.add(dead);
+		
+		Util.sendTitle(dead, 10, 20, 10, "§6Du bist der Tod!", "");
 		Bukkit.broadcastMessage(MTP.PREFIX + dead.getName() + " ist mit der Pest infiziert!");
 		
 		this.deadlord = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
@@ -103,7 +107,7 @@ public class MinigamePest extends Minigame {
 		
 		ID.add(new BukkitRunnable() {
 			
-			int timer = 30;
+			int timer = 20;
 			
 			public void run() {
 				
@@ -111,7 +115,7 @@ public class MinigamePest extends Minigame {
 					
 					all.setLevel(timer);
 					all.setExp(0);
-					all.setExp((1f/30) * timer);
+					all.setExp((1f/20) * timer);
 					
 				}
 				
@@ -168,7 +172,10 @@ public class MinigamePest extends Minigame {
 						
 					team_alive.remove(p);
 					team_dead.add(p);
-					p.sendMessage(MTP.PREFIX + "Du bist nun auch infiziert!");
+
+					Util.sendTitle(p, 10, 20, 10, "§cDu wurdest Infiziert!", "");
+					Bukkit.broadcastMessage(MTP.PREFIX + "§e" + p.getName() + " §7wurde infiziert!");
+					p.playSound(p.getLocation(), Sound.ENDERMAN_DEATH, 1, 1);
 					
 					p.getInventory().setHelmet(this.helpers);
 					p.getInventory().setChestplate(this.chest);

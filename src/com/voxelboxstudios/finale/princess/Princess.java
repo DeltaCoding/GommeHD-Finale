@@ -32,6 +32,11 @@ public class Princess {
     /** Constructor **/
 
     public Princess(Location loc) {
+    	/** Chunk **/
+    	
+    	loc.getChunk().load();
+    	
+    	
         /** Texts **/
 
         texts = new ArrayList<String>();

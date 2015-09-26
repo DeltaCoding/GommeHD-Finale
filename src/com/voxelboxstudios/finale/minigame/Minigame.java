@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.potion.PotionEffect;
 
 import com.voxelboxstudios.finale.MTP;
 
@@ -68,6 +69,10 @@ public abstract class Minigame implements Listener {
 			p.getInventory().setArmorContents(null);
 			p.setGameMode(GameMode.ADVENTURE);
 			p.setHealth(20.0D);
+			
+			for (PotionEffect effect : p.getActivePotionEffects()) {
+		        p.removePotionEffect(effect.getType());
+			}
 		}
 		
 		

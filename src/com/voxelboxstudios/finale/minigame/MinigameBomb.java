@@ -27,6 +27,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import com.voxelboxstudios.finale.MTP;
+import com.voxelboxstudios.finale.util.Util;
 
 public class MinigameBomb extends Minigame {	
 	
@@ -108,7 +109,7 @@ public class MinigameBomb extends Minigame {
 	/** RandomTimer **/
 	
 	public void randomTimer() {
-		int time = new Random().nextInt(40) + 20;
+		int time = new Random().nextInt(20) + 10;
 				
 		randomPlayer();
 		runt(time, 0);
@@ -148,6 +149,9 @@ public class MinigameBomb extends Minigame {
 		            MTP.getGameSpawn().getWorld().playSound(bombed.getLocation(), Sound.EXPLODE, 1, 1);
 					bombed.setGameMode(GameMode.SPECTATOR);
 					bombed.setVelocity(new Vector(0.00D, 0.5D, 0.00D));
+					
+					Util.sendTitle(bombed, 10, 20, 10, "§cDu bist explodiert!", "");
+					Bukkit.broadcastMessage(MTP.PREFIX + "§e" + bombed.getName() + " §7ist explodiert!");
 		            
 		            playerlist.remove(bombed);
 					

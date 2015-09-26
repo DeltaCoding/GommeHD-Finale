@@ -44,8 +44,9 @@ public class MinigameManager {
 		minigames.add(new MinigameTargetShooting());
 		minigames.add(new MinigameLanzenschubsen());
 		minigames.add(new MinigameHuegelkoenig());
-		
+		minigames.add(new MinigameWitchHunt());
 
+		
 		/** Shuffle **/
 
 		Collections.shuffle(minigames);
@@ -299,63 +300,88 @@ public class MinigameManager {
 	/** Win **/
 	
 	public void win(final Player winner) {
+		/** Let the princess speak **/
+
+		MTP.getPrincess().speak("Ich habe meinen Prinzen gefunden! Er trägt den wunderbaren Namen, §e" + winner.getName() + "!");
+		
+		
+		/** Play sound **/
+
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			/** Teleport **/
+			
+			p.teleport(MTP.getChurchSpawn());
+			
+			
+			/** Gamemode **/
+			
+			p.setGameMode(GameMode.ADVENTURE);
+			
+			
+			/** Default properties **/
+			
+			p.getInventory().clear();
+			p.getInventory().setArmorContents(null);
+			
+			p.setHealth(20.0D);
+			
+			
+			/** Play sound **/
+			
+			p.playSound(p.getLocation(), Sound.VILLAGER_YES, 1, 3);
+		}
+		
+		winner.teleport(MTP.getPrincessChurchSpawn());
+		
+		
+		/** Sounds **/
+    	
+    	for(Player tp : Bukkit.getOnlinePlayers()) {
+    		tp.playSound(tp.getLocation(), "win", 1, 1);
+    	}
+		
+		
+		/** Random **/
+		
+		Random r = new Random();
+		
+		
+		/** Fireworks **/
+		
+		for(int i = 0; i < 30; i++) {
+			/** Location **/
+			
+			Location loc = MTP.getPrincessChurchSpawn().clone().add(r.nextInt(25) - 12, 0, r.nextInt(25) - 12);
+			
+			
+			/** Spawn firework **/
+			
+			Util.spawnFirework(loc, Color.WHITE);
+		}
+		
+		
+		/** Heart **/
+		
+		for(int i = 0; i < 10; i++) MTP.getPrincessChurchSpawn().getWorld().playEffect(MTP.getPrincessChurchSpawn().clone().add(0, 2, 0), Effect.HEART, 10);
+
+		
+		/** Scheduler **/
+		
 		new BukkitRunnable() {
 			public void run() {
-				/** Let the princess speak **/
-
-				MTP.getPrincess().speak("Ich habe meinen Ritter gefunden! Er trägt den wunderbaren Namen, §e" + winner.getName());
+				/** Broadcast **/
+				
+				Bukkit.broadcastMessage(MTP.PREFIX + "Der Server startet in 5 Sekunden neu.");
 				
 				
-				/** Random **/
-				
-				Random r = new Random();
-				
-				
-				/** Fireworks **/
-				
-				for(int i = 0; i < 30; i++) {
-					/** Location **/
-					
-					Location loc = MTP.getPrincessSpawn().clone().add(r.nextInt(50) - 25, r.nextInt(25), r.nextInt(50) - 25);
-					
-					
-					/** Spawn firework **/
-					
-					Util.spawnFirework(loc, Color.LIME);
-				}
-				
-				
-				/** Heart **/
-				
-				for(int i = 0; i < 10; i++) MTP.getPrincessSpawn().getWorld().playEffect(MTP.getPrincessSpawn().clone().add(0, 2, 0), Effect.HEART, 10);
-
-
-				/** Play sound **/
-
-				for(Player p : Bukkit.getOnlinePlayers()) {
-					p.playSound(p.getLocation(), Sound.VILLAGER_YES, 1, 3);
-				}
-				
-				
-				/** Scheduler **/
+				/** Shutdown **/
 				
 				new BukkitRunnable() {
 					public void run() {
-						/** Broadcast **/
-						
-						Bukkit.broadcastMessage(MTP.PREFIX + "Der Server startet in 5 Sekunden neu.");
-						
-						
-						/** Shutdown **/
-						
-						new BukkitRunnable() {
-							public void run() {
-								Bukkit.shutdown();
-							}
-						}.runTaskLater(MTP.getPlugin(), 5 * 20L);
+						Bukkit.shutdown();
 					}
 				}.runTaskLater(MTP.getPlugin(), 5 * 20L);
 			}
-		}.runTaskLater(MTP.getPlugin(), 2 * 20L);
+		}.runTaskLater(MTP.getPlugin(), 5 * 20L);
 	}
 }

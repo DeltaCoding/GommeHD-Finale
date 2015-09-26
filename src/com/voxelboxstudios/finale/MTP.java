@@ -138,7 +138,7 @@ public class MTP extends JavaPlugin {
 		/** Locations **/
 		
 		gamespawn = new Location(Bukkit.getWorlds().get(0), 1551, 11, 376, 90, -30);
-		lobbyspawn = new Location(Bukkit.getWorlds().get(0), 1571, 10, 387);
+		lobbyspawn = new Location(Bukkit.getWorlds().get(0), 1749, 11, 431.5);
 		princessspawn = new Location(Bukkit.getWorlds().get(0), 1542.5, 15, 376.5, -90, 38);
 		
 		
@@ -158,7 +158,8 @@ public class MTP extends JavaPlugin {
 			/** Game rule **/
 
 			w.setGameRuleValue("doDaylightCycle", "false");
-
+			w.setGameRuleValue("doFireTick", "false");
+			
 
 			/** Set time **/
 
@@ -183,23 +184,29 @@ public class MTP extends JavaPlugin {
 		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 369.5, -90, 0), true);
 		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 365.5, -90, 0), false);
 		new Guard(new Location(Bukkit.getWorlds().get(0), 1632.5, 11, 396.5, -45, 0), false);
-		new Guard(new Location(Bukkit.getWorlds().get(0), 1610.5, 31.06250, 439.425, 135, 0), false);
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1612.5, 27, 442, 135, 0), false);
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1571.5, 9, 563.5, 135, 0), false);
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1567.5, 9, 563.5, 135, 0), false);
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1738.5, 4, 425.5, -90, 0), false);
 		
 		
 		/** Hofnarren **/
 		
 		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1541.5, 15, 375.5, -90, 35), "DerSpinner");
-		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1555.5, 11, 382.5, 135, 0), "l_Maxi_l");
+		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1555.5, 11, 376.5, 90, 0), "l_Maxi_l");
 		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1646.5, 9, 392.5, 45, 0), "l_Maxi_l");
+		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1749.5, 4, 441.5, -180, 0), "l_Maxi_l");
 		
 		
 		/** Princesses **/
 		
-		new Princess(new Location(Bukkit.getWorlds().get(0), 1608.5, 31, 440.5, 135, 0));
+		new Princess(new Location(Bukkit.getWorlds().get(0), 1611.5, 27, 442.5, 135, 0));
 		new Princess(new Location(Bukkit.getWorlds().get(0), 1544.5, 15, 441.5, 0, 0));
 		new Princess(new Location(Bukkit.getWorlds().get(0), 1643.5, 9, 395.5, -45, 0));
 		new Princess(new Location(Bukkit.getWorlds().get(0), 1692.5, 16, 464.5, 0, 0));
-		new Princess(new Location(Bukkit.getWorlds().get(0), 1565.5, 15, 514.5, -45, 0));
+		new Princess(new Location(Bukkit.getWorlds().get(0), 1569.5, 9, 563.5, -135, 0));
+		
+		new Princess(MTP.getPrincessChurchSpawn());
 		
 
 		/** Listeners **/
@@ -220,6 +227,7 @@ public class MTP extends JavaPlugin {
 		pm.registerEvents(new ListenerClick(), plugin);
 		pm.registerEvents(new ListenerProjectile(), plugin);
 		pm.registerEvents(new ListenerLogin(), plugin);
+		pm.registerEvents(new ListenerFade(), plugin);
 		
 		
 		/** Lobby state **/
@@ -377,6 +385,20 @@ public class MTP extends JavaPlugin {
 	/** Needed points to win **/
 	
 	public static int neededPointsToWin() {
-		return 5;
+		return 1;
+	}
+
+
+	/** Princess church spawn **/
+	
+	public static Location getPrincessChurchSpawn() {
+		return new Location(Bukkit.getWorlds().get(0), 1590.5, 10, 329.5, 0, 0);
+	}
+	
+	
+	/** Church spawn **/
+	
+	public static Location getChurchSpawn() {
+		return new Location(Bukkit.getWorlds().get(0), 1591.5, 9, 346.5, -180, 0);
 	}
 }
