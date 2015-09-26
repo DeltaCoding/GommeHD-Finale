@@ -32,6 +32,11 @@ public class MTP extends JavaPlugin {
 	
 	public static final String PREFIX = ChatColor.GOLD + "Marry the Princess " + ChatColor.YELLOW + "» " + ChatColor.GRAY;
 	
+	
+	/** Secondary **/
+	
+	private static List<Princess> secondary;
+	
 
 	/** Princess **/
 
@@ -108,6 +113,11 @@ public class MTP extends JavaPlugin {
 		hofnarren = new ArrayList<Hofnarr>();
 		
 		
+		/** Princesses **/
+		
+		secondary = new ArrayList<Princess>();
+		
+		
 		/** Packet **/
 		
 		packet = new PacketPlayResourcePackStatus();
@@ -172,6 +182,8 @@ public class MTP extends JavaPlugin {
 		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 383.5, -90, 0), false);
 		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 369.5, -90, 0), true);
 		new Guard(new Location(Bukkit.getWorlds().get(0), 1537.5, 11, 365.5, -90, 0), false);
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1632.5, 11, 396.5, -45, 0), false);
+		new Guard(new Location(Bukkit.getWorlds().get(0), 1610.5, 31.06250, 439.425, 135, 0), false);
 		
 		
 		/** Hofnarren **/
@@ -179,6 +191,15 @@ public class MTP extends JavaPlugin {
 		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1541.5, 15, 375.5, -90, 35), "DerSpinner");
 		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1555.5, 11, 382.5, 135, 0), "l_Maxi_l");
 		new Hofnarr(new Location(Bukkit.getWorlds().get(0), 1646.5, 9, 392.5, 45, 0), "l_Maxi_l");
+		
+		
+		/** Princesses **/
+		
+		new Princess(new Location(Bukkit.getWorlds().get(0), 1608.5, 31, 440.5, 135, 0));
+		new Princess(new Location(Bukkit.getWorlds().get(0), 1544.5, 15, 441.5, 0, 0));
+		new Princess(new Location(Bukkit.getWorlds().get(0), 1643.5, 9, 395.5, -45, 0));
+		new Princess(new Location(Bukkit.getWorlds().get(0), 1692.5, 16, 464.5, 0, 0));
+		new Princess(new Location(Bukkit.getWorlds().get(0), 1565.5, 15, 514.5, -45, 0));
 		
 
 		/** Listeners **/
@@ -224,9 +245,11 @@ public class MTP extends JavaPlugin {
 		}
 		
 		
-		/** Remove princess **/
+		/** Remove princesses **/
 		
-		princess.getArmorStand().remove();
+		for(Princess p : secondary) {
+			p.getArmorStand().remove();
+		}
 	}
 
 	
@@ -341,5 +364,19 @@ public class MTP extends JavaPlugin {
 	
 	public static List<Hofnarr> getHofnarren() {
 		return hofnarren;
+	}
+
+
+	/** Secondary princesses **/
+	
+	public static List<Princess> getSecondaryPrincesses() {
+		return secondary;
+	}
+
+
+	/** Needed points to win **/
+	
+	public static int neededPointsToWin() {
+		return 5;
 	}
 }

@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -16,6 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.voxelboxstudios.finale.MTP;
 import com.voxelboxstudios.finale.scoreboards.Scoreboards;
 import com.voxelboxstudios.finale.state.GameState;
+import com.voxelboxstudios.finale.util.Util;
 
 public class MinigameManager {
 
@@ -192,7 +195,7 @@ public class MinigameManager {
 	/** End **/
 	
 	@SuppressWarnings("deprecation")
-	public void end() {
+	public void end(boolean deathmatch, final Player winner) {
 		/** Set state **/
 
 		MTP.setState(GameState.WAITING);
@@ -218,13 +221,14 @@ public class MinigameManager {
 			p.getInventory().clear();
 			p.getInventory().setArmorContents(null);
 			
-			if(!MTP.getSpectators().contains(p.getName()))
-				p.setGameMode(GameMode.ADVENTURE);
-			else
-				p.setGameMode(GameMode.SPECTATOR);
-
-			
-			p.playEffect(MTP.getGameSpawn(), Effect.RECORD_PLAY, Material.RECORD_6.getId());
+			if(!deathmatch) {
+				if(!MTP.getSpectators().contains(p.getName()))
+					p.setGameMode(GameMode.ADVENTURE);
+				else
+					p.setGameMode(GameMode.SPECTATOR);
+					
+				p.playEffect(MTP.getGameSpawn(), Effect.RECORD_PLAY, Material.RECORD_6.getId());
+			}
 		}
 		
 		
@@ -235,16 +239,95 @@ public class MinigameManager {
 
 		/** Princess **/
 
+		if(!deathmatch) {
+			/** Winners **/
+			
+			List<Player> teners = new ArrayList<Player>();
+			
+			for(Player pt : Bukkit.getOnlinePlayers()) {
+				if(!MTP.getSpectators().contains(pt.getName())) {
+					if(MTP.points.containsKey(pt.getName())) {
+						if(MTP.points.get(pt.getName()) == MTP.neededPointsToWin()) {
+							teners.add(pt);
+						}
+					}
+				}
+			}
+			
+			if(teners.size() == 0) {
+				new BukkitRunnable() {
+					public void run() {
+						/** Let the princess speak **/
+
+						MTP.getPrincess().speak();
+						
+						
+						/** Heart **/
+						
+						MTP.getPrincessSpawn().getWorld().playEffect(MTP.getPrincessSpawn().clone().add(0, 1.5, 0), Effect.HEART, 1);
+
+
+						/** Play sound **/
+
+						for(Player p : Bukkit.getOnlinePlayers()) {
+							p.playSound(p.getLocation(), Sound.VILLAGER_YES, 1, 3);
+						}
+						
+						
+						/** Runnable **/
+						
+						new BukkitRunnable() {
+							public void run() {
+								next();
+							}
+						}.runTaskLater(MTP.getPlugin(), 15 * 20L);
+					}
+				}.runTaskLater(MTP.getPlugin(), 2 * 20L);
+			} else {
+				if(teners.size() == 1) {
+					win(teners.get(0));
+				} else {
+					start(new MinigameDeathmatch());
+				}
+			}
+		} else {
+			win(winner);
+		}
+	}
+	
+	
+	/** Win **/
+	
+	public void win(final Player winner) {
 		new BukkitRunnable() {
 			public void run() {
 				/** Let the princess speak **/
 
-				MTP.getPrincess().speak();
+				MTP.getPrincess().speak("Ich habe meinen Ritter gefunden! Er trägt den wunderbaren Namen, §e" + winner.getName());
+				
+				
+				/** Random **/
+				
+				Random r = new Random();
+				
+				
+				/** Fireworks **/
+				
+				for(int i = 0; i < 30; i++) {
+					/** Location **/
+					
+					Location loc = MTP.getPrincessSpawn().clone().add(r.nextInt(50) - 25, r.nextInt(25), r.nextInt(50) - 25);
+					
+					
+					/** Spawn firework **/
+					
+					Util.spawnFirework(loc, Color.LIME);
+				}
 				
 				
 				/** Heart **/
 				
-				MTP.getPrincessSpawn().getWorld().playEffect(MTP.getPrincessSpawn().clone().add(0, 1.5, 0), Effect.HEART, 1);
+				for(int i = 0; i < 10; i++) MTP.getPrincessSpawn().getWorld().playEffect(MTP.getPrincessSpawn().clone().add(0, 2, 0), Effect.HEART, 10);
 
 
 				/** Play sound **/
@@ -254,13 +337,24 @@ public class MinigameManager {
 				}
 				
 				
-				/** Runnable **/
+				/** Scheduler **/
 				
 				new BukkitRunnable() {
 					public void run() {
-						next();
+						/** Broadcast **/
+						
+						Bukkit.broadcastMessage(MTP.PREFIX + "Der Server startet in 5 Sekunden neu.");
+						
+						
+						/** Shutdown **/
+						
+						new BukkitRunnable() {
+							public void run() {
+								Bukkit.shutdown();
+							}
+						}.runTaskLater(MTP.getPlugin(), 5 * 20L);
 					}
-				}.runTaskLater(MTP.getPlugin(), 15 * 20L);
+				}.runTaskLater(MTP.getPlugin(), 5 * 20L);
 			}
 		}.runTaskLater(MTP.getPlugin(), 2 * 20L);
 	}

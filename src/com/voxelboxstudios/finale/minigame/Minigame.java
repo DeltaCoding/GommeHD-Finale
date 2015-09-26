@@ -52,6 +52,10 @@ public abstract class Minigame implements Listener {
 	/** End **/
 	
 	public void end() {
+		end(false, null);
+	}
+	
+	public void end(boolean deathmatch, Player winner) {
 		/** Listener **/
 
 		HandlerList.unregisterAll(this);
@@ -69,7 +73,7 @@ public abstract class Minigame implements Listener {
 		
 		/** End in minigame manager **/
 		
-		MTP.getMinigameManager().end();
+		MTP.getMinigameManager().end(deathmatch, winner);
 	}
 	
 }

@@ -2,6 +2,8 @@ package com.voxelboxstudios.finale.listener;
 
 import com.voxelboxstudios.finale.MTP;
 import com.voxelboxstudios.finale.state.GameState;
+
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -16,6 +18,17 @@ public class ListenerDamage implements Listener {
 
         if(MTP.getState() == GameState.WAITING || MTP.getState() == GameState.LOBBY) {
             e.setCancelled(true);
+        }
+        
+        
+        /** Spectator **/
+        
+        if(e.getEntity() instanceof Player) {
+        	/** Player **/
+        	
+        	Player p = (Player) e.getEntity();
+        	
+        	if(MTP.getSpectators().contains(p.getName())) e.setCancelled(true);
         }
     }
 

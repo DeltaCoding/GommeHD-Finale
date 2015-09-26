@@ -12,7 +12,6 @@ import org.bukkit.entity.Horse.Style;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
@@ -24,6 +23,7 @@ import org.bukkit.util.Vector;
 
 import com.voxelboxstudios.finale.MTP;
 import com.voxelboxstudios.finale.util.ActionBar;
+import com.voxelboxstudios.finale.util.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -165,6 +165,11 @@ public class MinigameLanzentunier extends Minigame {
             /** Add item **/
             
             p.getInventory().addItem(lanze);
+            
+            
+            /** Armor **/
+            
+            p.getInventory().setHelmet(Util.getShortItem(Material.CHAINMAIL_CHESTPLATE, "§r§7Brustplatte"));
 
 
             /** Set passenger **/
@@ -189,15 +194,6 @@ public class MinigameLanzentunier extends Minigame {
     }
 
     
-    /** Click **/
-    
-    @EventHandler
-    public void onClick(InventoryClickEvent e) {
-    	if(e.getWhoClicked().getGameMode() != GameMode.CREATIVE)
-    		e.setCancelled(true);
-    }
-    
-
     /** Quit **/
 
     @EventHandler
@@ -254,9 +250,9 @@ public class MinigameLanzentunier extends Minigame {
         	
         	for(Player tp : Bukkit.getOnlinePlayers()) {
         		if(tp == p)
-        			tp.playSound(p.getLocation(), "win", 1, 1);
+        			tp.playSound(tp.getLocation(), "win", 1, 1);
         		else
-        			tp.playSound(p.getLocation(), "lose", 1, 1);
+        			tp.playSound(tp.getLocation(), "lose", 1, 1);
         	}
         	
         	

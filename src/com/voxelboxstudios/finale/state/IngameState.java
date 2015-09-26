@@ -3,6 +3,8 @@ package com.voxelboxstudios.finale.state;
 import org.bukkit.*;
 
 import com.voxelboxstudios.finale.MTP;
+import com.voxelboxstudios.finale.scoreboards.Scoreboards;
+
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -85,6 +87,11 @@ public class IngameState {
 				}.runTaskLater(MTP.getPlugin(), 15 * 20L);
 			}
 		}.runTaskLater(MTP.getPlugin(), 2 * 20L);
+		
+		
+		/** Scoreboards **/
+		
+		Scoreboards.update();
 	}
 	
 }

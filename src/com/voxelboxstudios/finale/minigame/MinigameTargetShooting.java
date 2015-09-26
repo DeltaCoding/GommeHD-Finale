@@ -97,6 +97,8 @@ public class MinigameTargetShooting extends Minigame {
 		locations.add(new Location(Bukkit.getWorlds().get(0), 1655.5, 13, 411.5, 90, 0));
 		locations.add(new Location(Bukkit.getWorlds().get(0), 1660.5, 13, 421.5, 90, 0));
 		locations.add(new Location(Bukkit.getWorlds().get(0), 1648.5, 13, 423.5));
+		locations.add(new Location(Bukkit.getWorlds().get(0), 1641.5, 13, 422.5));
+		locations.add(new Location(Bukkit.getWorlds().get(0), 1644.5, 13, 411.5));
 		
 		
 		/** Shuffle **/
@@ -290,9 +292,9 @@ public class MinigameTargetShooting extends Minigame {
 	    		        	
 	    		        	MTP.points.put(p.getName(), MTP.points.get(p.getName()) + 1);
 	    		        	
-		        			tp.playSound(p.getLocation(), "win", 1, 1);
+		        			tp.playSound(tp.getLocation(), "win", 1, 1);
 		        		} else
-		        			tp.playSound(p.getLocation(), "lose", 1, 1);
+		        			tp.playSound(tp.getLocation(), "lose", 1, 1);
 		        	}
 		        	
 		        	

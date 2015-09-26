@@ -238,9 +238,9 @@ public class MinigameBomb extends Minigame {
         	
         	for(Player tp : Bukkit.getOnlinePlayers()) {
         		if(tp == p)
-        			tp.playSound(p.getLocation(), "win", 1, 1);
+        			tp.playSound(tp.getLocation(), "win", 1, 1);
         		else
-        			tp.playSound(p.getLocation(), "lose", 1, 1);
+        			tp.playSound(tp.getLocation(), "lose", 1, 1);
         	}
         	        	
         	/** Runnable **/

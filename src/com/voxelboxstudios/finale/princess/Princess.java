@@ -10,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import com.voxelboxstudios.finale.MTP;
 import com.voxelboxstudios.finale.util.Util;
 
 import java.util.ArrayList;
@@ -61,6 +62,11 @@ public class Princess {
 		
 		as.setCustomName("§dPrinzessin");
 		as.setCustomNameVisible(true);
+		
+		
+		/** Add to secondary **/
+		
+		MTP.getSecondaryPrincesses().add(this);
     }
     
     
