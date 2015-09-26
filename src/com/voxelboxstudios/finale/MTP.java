@@ -153,6 +153,8 @@ public class MTP extends JavaPlugin {
 		pm.registerEvents(new ListenerDrop(), plugin);
 		pm.registerEvents(new ListenerMove(), plugin);
 		pm.registerEvents(new ListenerArmorStand(), plugin);
+		pm.registerEvents(new ListenerInteract(), plugin);
+		pm.registerEvents(new ListenerBuild(), plugin);
 		
 		
 		/** Lobby state **/

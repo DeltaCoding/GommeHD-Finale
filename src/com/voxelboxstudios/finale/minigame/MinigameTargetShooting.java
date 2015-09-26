@@ -20,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -140,30 +141,52 @@ public class MinigameTargetShooting extends Minigame {
 		teleported = true;
 		
 		
-		/** Spawn **/
-		
-		runnable = new BukkitRunnable() {
-			public void run() {
-				/** Get random location **/
-				
-				Location loc = getRandomLocation();
-				
-				
-				/** Spawn chicken **/
-				
-				chickens.add(loc.getWorld().spawnEntity(loc, EntityType.CHICKEN));
-				
-				
-				/** Remove chickens **/
-				
-				for(Entity e : new ArrayList<Entity>(chickens)) {
-					if(e.getLocation().getBlockY() == 9) {
-						e.remove();
-						chickens.remove(e);
-					}
-				}
-			}
-		}.runTaskTimer(MTP.getPlugin(), 5L, 5L);
+		/** Timer **/
+    	
+    	new BukkitRunnable() {
+    		int count = 4;
+    		
+    		public void run() {
+    			for(Player p : Bukkit.getOnlinePlayers()) {
+    				if(count != 1) {
+    					p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 1);
+    				} else {
+    					p.playSound(p.getLocation(), Sound.NOTE_PLING, 1, 3);
+    				}
+    			}
+    			
+    			if(count == 1) {
+    				/** Spawn **/
+    				
+    				runnable = new BukkitRunnable() {
+    					public void run() {
+    						/** Get random location **/
+    						
+    						Location loc = getRandomLocation();
+    						
+    						
+    						/** Spawn chicken **/
+    						
+    						chickens.add(loc.getWorld().spawnEntity(loc, EntityType.CHICKEN));
+    						
+    						
+    						/** Remove chickens **/
+    						
+    						for(Entity e : new ArrayList<Entity>(chickens)) {
+    							if(e.getLocation().clone().subtract(0, 1, 0).getBlock().getType() != Material.AIR) {
+    								e.remove();
+    								chickens.remove(e);
+    							}
+    						}
+    					}
+    				}.runTaskTimer(MTP.getPlugin(), 5L, 5L);
+    				
+    				cancel();
+    			}
+    			
+    			count--;
+    		}
+    	}.runTaskTimer(MTP.getPlugin(), 20L, 20L);
 	}
 	
 	
@@ -224,6 +247,14 @@ public class MinigameTargetShooting extends Minigame {
 				}
 			}
 		}
+	}
+	
+	
+	/** Projectile hit **/
+	
+	@EventHandler
+	public void onHit(ProjectileHitEvent e) {
+		e.getEntity().remove();
 	}
 	
 	

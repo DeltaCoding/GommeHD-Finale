@@ -31,7 +31,7 @@ public class MinigameManager {
 	public void setup() {
 		/** Add minigames **/
 
-		//minigames.add(new MinigamePest());
+		minigames.add(new MinigamePest());
 		minigames.add(new MinigameLanzentunier());
 		minigames.add(new MinigameBomb());
 		minigames.add(new MinigameCastleWar());
